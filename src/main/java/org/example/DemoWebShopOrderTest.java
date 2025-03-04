@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.Console;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -42,13 +43,13 @@ public class DemoWebShopOrderTest {
 
 
     @Test
-    public void testOrderUsingData1() throws IOException {
+    public void testOrderUsingData1() throws IOException, InterruptedException {
         performOrderTest("src/main/java/org/example/data1.txt");
     }
 
 
     @Test
-    public void testOrderUsingData2() throws IOException {
+    public void testOrderUsingData2() throws IOException, InterruptedException {
         performOrderTest("src/main/java/org/example/data2.txt");
     }
 
@@ -57,7 +58,7 @@ public class DemoWebShopOrderTest {
      * - Log in using the registered user.
      * - Navigate, add products to the cart (reading from a text file), and complete checkout.
      */
-    private void performOrderTest(String dataFileName) throws IOException {
+    private void performOrderTest(String dataFileName) throws IOException, InterruptedException {
         // 1. Open the website
         driver.get("https://demowebshop.tricentis.com/");
 
@@ -133,14 +134,14 @@ public class DemoWebShopOrderTest {
 
 
         // 7. Shipping Address: For this test, assume existing address is acceptable; click Continue
-        wait.until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//input[@onclick='Shipping.save()']")))
-                .click();
+        //wait.until(ExpectedConditions.elementToBeClickable(
+        //                By.xpath("//div[@id='shipping-buttons-container']//input[contains(@onclick, 'Shipping.save()')]")))
+        //        .click();
 
         // 8. Shipping Method: click Continue
-        wait.until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//input[@onclick='ShippingMethod.save()']")))
-                .click();
+        //wait.until(ExpectedConditions.elementToBeClickable(
+        //                By.xpath("//input[@onclick='ShippingMethod.save()']")))
+         //       .click();
 
         // 9. Payment Method: click Continue
         wait.until(ExpectedConditions.elementToBeClickable(
@@ -158,7 +159,10 @@ public class DemoWebShopOrderTest {
                 .click();
 
         // 12. Verify the confirmation message
+        Thread.sleep(2000);
         String confirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".title"))).getText();
+        System.out.println(confirmationMessage);
+
         assertTrue(confirmationMessage.contains("Your order has been successfully processed!"),
                 "Order was not successfully processed.");
     }
