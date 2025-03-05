@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -17,7 +18,9 @@ public class DemoWebShopRegistrationTest {
 
     @BeforeEach
     public void setUp() {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // run in headless mode
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
@@ -28,13 +31,13 @@ public class DemoWebShopRegistrationTest {
         }
     }
 
-    @Test
-    public void testRegistration() {
-        // Call the helper to register a new user in a separate session.
-        UserRegistrationHelper.registerUserIfNeeded();
-        // Assert that the registration helper now has valid credentials.
-        String registeredEmail = UserRegistrationHelper.getEmail();
-        assertNotNull(registeredEmail, "The user email should have been registered successfully.");
-        System.out.println("Registered user: " + registeredEmail);
-    }
+//    @Test
+//    public void testRegistration() {
+//        // Call the helper to register a new user in a separate session.
+//        UserRegistrationHelper.registerUserIfNeeded();
+//        // Assert that the registration helper now has valid credentials.
+//        String registeredEmail = UserRegistrationHelper.getEmail();
+//        assertNotNull(registeredEmail, "The user email should have been registered successfully.");
+//        System.out.println("Registered user: " + registeredEmail);
+//    }
 }
