@@ -31,7 +31,7 @@ public class DemoWebShopOrderTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless"); // run in headless mode
-        options.addArguments("----user-data-dir= " + System.getProperty("user.dir"));
+        options.addArguments("--user-data-dir= " + System.getProperty("user.dir"));
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
