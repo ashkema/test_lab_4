@@ -3,6 +3,7 @@ package org.example;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -19,8 +20,13 @@ public class UserRegistrationHelper {
         if (email != null) {
             return; // User already registered.
         }
-        WebDriver driver = new ChromeDriver();
+
+        ChromeOptions options = new ChromeOptions();
+// Enable headless mode
+        options.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
 
         try {
             // Open the website and start registration
