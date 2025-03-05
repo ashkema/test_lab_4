@@ -24,7 +24,6 @@ public class UserRegistrationHelper {
         ChromeOptions options = new ChromeOptions();
 // Enable headless mode
         options.addArguments("--headless");
-        options.addArguments("--user-data-dir= " + System.getProperty("user.dir"));
         WebDriver driver = new ChromeDriver(options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
